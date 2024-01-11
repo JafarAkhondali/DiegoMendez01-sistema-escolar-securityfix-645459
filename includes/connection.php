@@ -2,7 +2,7 @@
 
 $host     = 'localhost';
 $user     = 'root';
-$db       = 'sistema-escolar';
+$db       = 'sistema_escolar';
 $password = '';
 
 try{
