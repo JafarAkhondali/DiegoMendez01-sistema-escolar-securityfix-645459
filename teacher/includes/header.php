@@ -1,12 +1,3 @@
-<?php 
-
-session_start();
-if(empty($_SESSION['is_user'])){
-    header('Location: ./');
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
