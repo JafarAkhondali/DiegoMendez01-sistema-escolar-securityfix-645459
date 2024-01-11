@@ -6,5 +6,9 @@
     <script src="../js/plugins/chart.js"></script>
     <script src="../js/plugins/jquery.dataTables.min.js"></script>
     <!-- Page specific javascripts-->
+    <!-- DataTable Plugin  -->
+    <script type="text/javascript" src="../js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/dataTables.bootstrap.min.js"></script>
+    <script src="js/functions-users.js"></script>
   </body>
 </html>

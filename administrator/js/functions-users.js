@@ -1,0 +1,1 @@
+$('#tableusers').DataTable();
