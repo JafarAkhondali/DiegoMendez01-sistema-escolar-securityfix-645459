@@ -78,7 +78,8 @@ input {
     text-align: center;
 }
 
-button {
+#loginUser, #loginTeacher {
+    margin-top: 10px !important;
     display: block;
     width: 100%;
     margin-top: 15px;

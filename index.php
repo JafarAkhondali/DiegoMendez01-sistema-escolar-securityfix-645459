@@ -15,6 +15,39 @@
 				<p>School</p>
 			</div>
 		</div>
+		<div class="cont-header">
+			<h1>Bienvenid@</h1>
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+					aria-selected="true">Administrador</a>
+				</li>
+				<li class="nav-item" role="presentation">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+					aria-selected="false">Profesor</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    				<form action="" method="POST" onSubmit="return validar()">
+        				<label for="user">Usuario</label>
+        				<input type="text" name="user" id="user" placeholder="Nombre de Usuario" />
+        				<label for="password_hash">Clave</label>
+        				<input type="text" name="password_hash" id="password_hash" placeholder="Clave de Seguridad" />
+        				<button id="loginUser" type="button">Iniciar Sesión</button>
+        			</form>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    				<form action="" method="POST" onSubmit="return validar()">
+        				<label for="user">Usuario</label>
+        				<input type="text" name="user" id="user" placeholder="Nombre de Usuario" />
+        				<label for="password_hash">Clave</label>
+        				<input type="text" name="password_hash" id="password_hash" placeholder="Clave de Seguridad" />
+        				<button id="loginTeacher" type="button">Iniciar Sesión</button>
+        			</form>
+				</div>
+			</div>
+		</div>
 	</header>
 	<script src="js/jquery-3.7.0.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
