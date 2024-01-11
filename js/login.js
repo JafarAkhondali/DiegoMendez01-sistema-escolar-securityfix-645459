@@ -30,15 +30,15 @@ function loginUser()
 
 function loginTeacher()
 {
-	var login = $('#user').val();
-	var pass  = $('#password_hash').val();
+	var login = $('#identification').val();
+	var pass  = $('#password').val();
 	
 	$.ajax({
 		url: './includes/loginTeacher.php',
 		method: 'POST',
 		data: {
-			user : login,
-			password_hash : pass
+			identification : login,
+			password : pass
 		},
 		success: function(data){
 			$('#messageTeacher').html(data);

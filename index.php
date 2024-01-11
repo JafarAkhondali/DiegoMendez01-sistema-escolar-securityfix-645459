@@ -1,3 +1,14 @@
+<?php 
+
+session_start();
+if(!empty($_SESSION['is_teacher'])){
+    header('Location: teacher/');
+}elseif(!empty($_SESSION['is_user'])){
+    header('Location: administrator/');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,10 +51,10 @@
 				</div>
 				<div class="tab-pane fade" id="teacher" role="tabpanel" aria-labelledby="teacher-tab">
     				<form action="" onSubmit="return validar()">
-        				<label for="user">Usuario</label>
-        				<input type="text" name="user" id="user" placeholder="Nombre de Usuario" />
-        				<label for="password_hash">Clave</label>
-        				<input type="text" name="password_hash" id="password_hash" placeholder="Clave de Seguridad" />
+        				<label for="identification">Usuario</label>
+        				<input type="text" name="identification" id="identification" placeholder="Numero Identificacion" />
+        				<label for="password">Clave</label>
+        				<input type="text" name="password" id="password" placeholder="Clave de Seguridad" />
         				<div id="messageTeacher"></div>
         				<button id="loginTeacher" type="button">Iniciar Sesión</button>
         			</form>

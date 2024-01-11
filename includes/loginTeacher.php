@@ -1,38 +1,35 @@
 <?php 
 session_start();
 if(!empty($_POST)){
-    if(empty($_POST['user']) OR empty($_POST['password_hash'])){
+    if(empty($_POST['identification']) OR empty($_POST['password'])){
         echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">X</button>Todos los campos
         son necesarios</div>';
     }else{
         require_once 'connection.php';
-        $user     = $_POST['user'];
-        $password = $_POST['password_hash'];
+        $identification = $_POST['identification'];
+        $password       = $_POST['password'];
         
         $sql = '
             SELECT
-                u.*,
-                r.name as nameRol
+                *
             FROM
-                users as u
-            INNER JOIN roles as r ON u.role_id = r.id
+                teachers
             WHERE
-                user = ?
+                identification = ?
         ';
         
         $query = $pdo->prepare($sql);
-        $query->execute([$user]);
+        $query->execute([$identification]);
         
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
         if($query->rowCount() > 0){
-            if(password_verify($password, $result['password_hash'])){
-                $_SESSION['is_user']   = true;
-                $_SESSION['is_active'] = $result['is_active'];
-                $_SESSION['id']        = $result['id'];
-                $_SESSION['name']      = $result['name'];
-                $_SESSION['role_id']   = $result['role_id'];
-                $_SESSION['role']      = $result['nameRol'];
+            if(password_verify($password, $result['password'])){
+                $_SESSION['is_teacher']        = true;
+                $_SESSION['is_active']         = $result['is_active'];
+                $_SESSION['id']                = $result['id'];
+                $_SESSION['name']              = $result['name'];
+                $_SESSION['identification']    = $result['identification'];
                 
                 echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">X</button>Redirecting</div>';
             }else{
