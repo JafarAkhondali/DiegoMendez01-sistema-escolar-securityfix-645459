@@ -24,7 +24,7 @@ for($i = 0; $i < count($consulta); $i++){
     }
     
     $consulta[$i]['acciones'] = '
-        <button class="btn btn-primary" title="Editar" onclick="edituser('.$consulta[$i]['id'].')">Editar</button>
+        <button class="btn btn-primary" title="Editar" onclick="editUser('.$consulta[$i]['id'].')">Editar</button>
         <button class="btn btn-danger" title="Eliminar" onclick="deleteuser('.$consulta[$i]['id'].')">Eliminar</button>
     ';
 }

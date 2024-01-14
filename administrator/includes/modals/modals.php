@@ -10,6 +10,7 @@
 			</div>
 			<div class="modal-body">
 				<form id="formUser" name="formUser">
+					<input type="hidden" name="id" id="id" value="" />
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Nombre:</label>
 						<input type="text" class="form-control" id="name" name="name" />
@@ -27,7 +28,7 @@
 						<select class="form-control" name="role_id" id="role_id">
 							<option value="">.::Seleccionar::.</option>
 							<option value="1">Administrador</option>
-							<option value="1">Asistente</option>
+							<option value="2">Asistente</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -40,7 +41,7 @@
 					</div>
 					<div class="modal-footer">
         				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        				<button type="submit" class="btn btn-primary">Guardar</button>
+        				<button type="submit" id="action" class="btn btn-primary">Guardar</button>
         			</div>
 				</form>
 			</div>

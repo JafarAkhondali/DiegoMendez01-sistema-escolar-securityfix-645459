@@ -3,12 +3,13 @@
 require_once '../../../includes/connection.php';
 
 if(!empty($_POST)){
-    if(empty($_POST['name']) OR empty($_POST['user']) OR empty($_POST['password_hash'])){
+    if(empty($_POST['name']) OR empty($_POST['user'])){
         $answer = [
             'status' => false,
             'msg'    => 'Todos los campos son requeridos'
         ];
     }else{
+        $id            = $_POST['id'];
         $name          = $_POST['name'];
         $user          = $_POST['user'];
         $password      = $_POST['password_hash'];
@@ -23,11 +24,11 @@ if(!empty($_POST)){
             FROM
                 users
             WHERE
-                user = ?
+                user = ? AND id != ?
         ';
         
         $query  = $pdo->prepare($sql);
-        $query->execute([$user]);
+        $query->execute([$user, $id]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
         if($result){
@@ -36,20 +37,65 @@ if(!empty($_POST)){
                 'msg'    => 'El usuario ya existe'
             ];
         }else{
-            $sqlInsert = '
-                INSERT INTO
-                    users (name, user, password_hash, role_id, is_active, created)
-                VALUES (?, ?, ?, ?, ?, now())
-            ';
+            if($id == 0){
+                $sqlInsert = '
+                        INSERT INTO
+                            users (name, user, password_hash, role_id, is_active, created)
+                        VALUES (?, ?, ?, ?, ?, now())
+                    ';
+                
+                $queryInsert  = $pdo->prepare($sqlInsert);
+                $request      = $queryInsert->execute([$name, $user, $password_hash, $role_id, $is_active]);
+                $action       = 1;
+            }else{
+                if(empty($password_hash)){
+                    $sqlUpdate = '
+                        UPDATE
+                            users 
+                        SET
+                            name = ?,
+                            user = ?,
+                            role_id = ?,
+                            is_active = ?
+                        WHERE
+                            id = ?
+                    ';
+                    
+                    $queryUpdate  = $pdo->prepare($sqlUpdate);
+                    $request      = $queryUpdate->execute([$name, $user, $role_id, $is_active, $id]);
+                    $action       = 2;
+                }else{
+                    $sqlUpdate = '
+                        UPDATE
+                            users
+                        SET
+                            name = ?,
+                            user = ?,
+                            password_hash = ?,
+                            role_id = ?,
+                            is_active = ?
+                        WHERE
+                            id = ?
+                    ';
+                    
+                    $queryUpdate  = $pdo->prepare($sqlUpdate);
+                    $request      = $queryUpdate->execute([$name, $user, $password_hash, $role_id, $is_active, $id]);
+                    $action       = 3;
+                }
+            }
             
-            $queryInsert  = $pdo->prepare($sqlInsert);
-            $resultInsert = $queryInsert->execute([$name, $user, $password_hash, $role_id, $is_active]);
-            
-            if($resultInsert){
-                $answer = [
-                    'status' => true,
-                    'msg'    => 'Usuario creado correctamente'
-                ];
+            if($request > 0){
+                if($action == 1){
+                    $answer = [
+                        'status' => true,
+                        'msg'    => 'Usuario creado correctamente'
+                    ];
+                }else{
+                    $answer = [
+                        'status' => true,
+                        'msg'    => 'Usuario actualizado correctamente'
+                    ];
+                }
             }else{
                 $answer = [
                     'status' => false,
