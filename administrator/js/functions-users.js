@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		"aProcessing": true,
 		"aServerSide": true,
 		"language": {
-			"url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/spanish.json"
+			"url": "http://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		},
 		"ajax": {
 			"url": "./models/users/table_users.php",
@@ -27,6 +27,22 @@ document.addEventListener('DOMContentLoaded', function(){
 		"iDisplayLength": 10,
 		"order": [[0, "asc"]]
 	});
+	
+	var formUser = document.querySelector('#formUser');
+	formUser.onsubmit = function(e){
+		e.preventDefault();
+		
+		var name          = document.querySelector('#name').value;
+		var user          = document.querySelector('#user').value;
+		var password_hash = document.querySelector('#password_hash').value;
+		var role_id       = document.querySelector('#role_id').value;
+		var is_active     = document.querySelector('#is_active').value;
+		
+		if(name == '' || user == '' || password_hash == ''){
+			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
+			return false;
+		}
+	}
 });
 
 function openModal()
