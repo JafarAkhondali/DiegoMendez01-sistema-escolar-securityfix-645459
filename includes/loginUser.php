@@ -27,14 +27,18 @@ if(!empty($_POST)){
         
         if($query->rowCount() > 0){
             if(password_verify($password, $result['password_hash'])){
-                $_SESSION['is_user']   = true;
-                $_SESSION['is_active'] = $result['is_active'];
-                $_SESSION['id']        = $result['id'];
-                $_SESSION['name']      = $result['name'];
-                $_SESSION['role_id']   = $result['role_id'];
-                $_SESSION['role']      = $result['nameRol'];
-                
-                echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">X</button>Redirecting</div>';
+                if($result['is_active'] == 1){
+                    $_SESSION['is_user']   = true;
+                    $_SESSION['is_active'] = $result['is_active'];
+                    $_SESSION['id']        = $result['id'];
+                    $_SESSION['name']      = $result['name'];
+                    $_SESSION['role_id']   = $result['role_id'];
+                    $_SESSION['role']      = $result['nameRol'];
+                    
+                    echo '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">X</button>Redirecting</div>';
+                }else{
+                    echo '<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert">X</button>Usuario inactivo, comuniquese con el administrador</div>';
+                }
             }else{
                 echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">X</button>Usuario y/o Clave incorrectos</div>';
             }

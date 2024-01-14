@@ -1,10 +1,13 @@
-    <!-- Essential javascripts for application to work-->
-    <script src="../js/jquery-3.7.0.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Otros scripts -->
     <script src="../js/main.js"></script>
-    <!-- The javascript plugin to display page loading on top  -->
     <script src="../js/plugins/chart.js"></script>
     <script src="../js/plugins/jquery.dataTables.min.js"></script>
-    <!-- Page specific javascripts-->
+    <script src="js/functions-users.js"></script>
   </body>
 </html>
