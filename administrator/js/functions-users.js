@@ -104,3 +104,37 @@ function editUser(id)
 		}
 	}
 }
+
+function deleteUser(id)
+{
+	var idUser = id;
+	
+	Swal.fire({
+		title: "Eliminar Usuario",
+		text: "¿Realmente desea eliminar el usuario?",
+		showDenyButton: true,
+		confirmButtonText: "Si, eliminar",
+		denyButtonText: `No, cancelar`
+	}).then((result) => {
+		if(result.isConfirmed){
+			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+			var url = './models/users/delet_users.php';
+			
+			request.open('POST', url, true);
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
+			var strData = "id=" + idUser;
+			request.send(strData);
+			request.onreadystatechange = function () {
+			    if (request.readyState == 4 && request.status == 200) {
+			        var data = JSON.parse(request.responseText);
+			        if (data.status) {
+			            Swal.fire('Eliminar', data.msg, 'success');
+			            tableusers.ajax.reload();
+			        } else {
+			            Swal.fire('Atencion', data.msg, 'error');
+			        }
+			    }
+			};
+		}
+	});
+}

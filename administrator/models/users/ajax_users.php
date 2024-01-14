@@ -24,7 +24,7 @@ if(!empty($_POST)){
             FROM
                 users
             WHERE
-                user = ? AND id != ?
+                user = ? AND id != ? AND is_active != 0
         ';
         
         $query  = $pdo->prepare($sql);
