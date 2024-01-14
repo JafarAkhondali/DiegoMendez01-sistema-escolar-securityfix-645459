@@ -42,6 +42,26 @@ document.addEventListener('DOMContentLoaded', function(){
 			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
 			return false;
 		}
+		
+		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+		var url     = './models/users/ajax-users.php';
+		var form    = new FormData(formUser);
+		
+		request.open('POST', url, true);
+		request.send(form);
+		request.onreadystatechange = function(){
+			if(request.readyState == 4 && request.status == 200){
+				var data = JSON.parse(request.responseText);
+				if(request.status){
+					$('#modalUser').modal('hide');
+					Swal.fire('Usuario', data.msg, 'success');
+					formUser.reset();
+					tableusers.ajax.reload();
+				}else{
+					Swal.fire('Usuario', data.msg, 'error');
+				}
+			}
+		}
 	}
 });
 
