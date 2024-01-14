@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-		var url     = './models/users/ajax-users.php';
+		var url     = './models/users/ajax_users.php';
 		var form    = new FormData(formUser);
 		
 		request.open('POST', url, true);
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function(){
 					formUser.reset();
 					tableusers.ajax.reload();
 				}else{
-					Swal.fire('Usuario', data.msg, 'error');
+					Swal.fire('Atencion', data.msg, 'error');
 				}
 			}
 		}
