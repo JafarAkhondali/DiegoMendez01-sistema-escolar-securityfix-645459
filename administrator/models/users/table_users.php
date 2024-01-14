@@ -4,9 +4,11 @@ require_once '../../../includes/connection.php';
 
 $sql = '
     SELECT
-        *
+        u.*,
+        r.name as nameRol
     FROM
-        users;
+        users as u
+    INNER JOIN roles as r ON u.role_id = r.id
 ';
 
 $query = $pdo->prepare($sql);

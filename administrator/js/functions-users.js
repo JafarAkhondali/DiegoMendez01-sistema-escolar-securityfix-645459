@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			{"data": "id"},
 			{"data": "name"},
 			{"data": "user"},
-			{"data": "role_id"},
+			{"data": "nameRol"},
 			{"data": "is_active"},
 			{"data": "created"}
 		],
