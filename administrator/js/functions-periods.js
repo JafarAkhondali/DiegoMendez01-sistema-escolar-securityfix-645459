@@ -69,16 +69,16 @@ function openModalPeriod()
 	document.querySelector('#formPeriod').reset();
 	$('#modalPeriod').modal('show');
 }
-/*
-function editCourse(id)
+
+function editPeriod(id)
 {
-	var idCourse = id;
+	var idPeriod = id;
 	
-	document.querySelector('#tituloModal').innerHTML = 'Actualizar Materia';
+	document.querySelector('#tituloModal').innerHTML = 'Actualizar Periodo';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/courses/edit_courses.php?id='+idCourse;
+	var url     = './models/periods/edit_periods.php?id='+idPeriod;
 	
 	request.open('GET', url, true);
 	request.send();
@@ -90,7 +90,7 @@ function editCourse(id)
 				document.querySelector('#name').value = data.data.name;
 				document.querySelector('#is_active').value = data.data.is_active;
 				
-				$('#modalCourse').modal('show');
+				$('#modalPeriod').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -98,31 +98,31 @@ function editCourse(id)
 	}
 }
 
-function deleteCourse(id)
+function deletePeriod(id)
 {
-	var idCourse = id;
+	var idPeriod = id;
 	
 	Swal.fire({
-		title: "Eliminar Materia",
-		text: "¿Realmente desea eliminar la materia?",
+		title: "Eliminar Periodo",
+		text: "¿Realmente desea eliminar el periodo?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			var url = './models/courses/delete_courses.php';
+			var url = './models/periods/delete_periods.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idCourse;
+			var strData = "id=" + idPeriod;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
 			        var data = JSON.parse(request.responseText);
 			        if (data.status) {
 			            Swal.fire('Eliminar', data.msg, 'success');
-			            tablecourses.ajax.reload();
+			            tableperiods.ajax.reload();
 			        } else {
 			            Swal.fire('Atencion', data.msg, 'error');
 			        }
@@ -130,4 +130,4 @@ function deleteCourse(id)
 			};
 		}
 	});
-}*/
+}
