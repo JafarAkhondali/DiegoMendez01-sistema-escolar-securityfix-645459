@@ -42,7 +42,6 @@
 					<div class="form-group">
 						<label for="is_active" class="col-form-label">Estado:</label>
 						<select class="form-control" name="is_active" id="is_active">
-							<option value="">.::Seleccionar::.</option>
 							<option value="1">Activo</option>
 							<option value="0">Inactivo</option>
 						</select>

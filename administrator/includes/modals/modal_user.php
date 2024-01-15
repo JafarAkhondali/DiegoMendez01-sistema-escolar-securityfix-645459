@@ -26,7 +26,6 @@
 					<div class="form-group">
 						<label for="role_id" class="col-form-label">Rol:</label>
 						<select class="form-control" name="role_id" id="role_id">
-							<option value="">.::Seleccionar::.</option>
 							<option value="1">Administrador</option>
 							<option value="2">Asistente</option>
 						</select>
@@ -34,7 +33,6 @@
 					<div class="form-group">
 						<label for="is_active" class="col-form-label">Estado:</label>
 						<select class="form-control" name="is_active" id="is_active">
-							<option value="">.::Seleccionar::.</option>
 							<option value="1">Activo</option>
 							<option value="0">Inactivo</option>
 						</select>

@@ -20,6 +20,8 @@
     class="app-menu__label">Aulas</span></a></li>
     <li><a class="app-menu__item" href="list_courses.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Materias</span></a></li>
+    <li><a class="app-menu__item" href="list_periods.php"><i class="app-menu__icon bi bi-code-square"></i><span
+    class="app-menu__label">Periodos</span></a></li>
     <li><a class="app-menu__item" href="../logout.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Logout</span></a></li>
   </ul>
