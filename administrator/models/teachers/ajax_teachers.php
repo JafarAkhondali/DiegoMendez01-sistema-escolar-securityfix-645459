@@ -51,7 +51,7 @@ if(!empty($_POST)){
                 $request      = $queryInsert->execute([$name, $address, $identification, $password_hash, $phone, $email, $level, $is_active]);
                 $action       = 1;
             }else{
-                if(empty($password_hash)){
+                if(empty($password)){
                     $sqlUpdate = '
                         UPDATE
                             teachers 

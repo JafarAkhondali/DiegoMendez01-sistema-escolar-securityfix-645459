@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		var age       	    = document.querySelector('#age').value;
 		var address       	= document.querySelector('#address').value;
 		var identification 	= document.querySelector('#identification').value;
+		var password 	    = document.querySelector('#password').value;
 		var phone       	= document.querySelector('#phone').value;
 		var email       	= document.querySelector('#email').value;
 		var birthdate       = document.querySelector('#birthdate').value;
