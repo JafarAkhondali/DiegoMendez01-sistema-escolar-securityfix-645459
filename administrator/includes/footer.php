@@ -13,5 +13,6 @@
     <script src="js/functions-teachers.js"></script>
     <script src="js/functions-students.js"></script>
     <script src="js/functions-classrooms.js"></script>
+    <script src="js/functions-degrees.js"></script>
   </body>
 </html>
