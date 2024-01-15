@@ -12,5 +12,8 @@
     <script src="js/functions-users.js"></script>
     <script src="js/functions-teachers.js"></script>
     <script src="js/functions-students.js"></script>
+    <script src="js/functions-classrooms.js"></script>
+    <script src="js/functions-degrees.js"></script>
+    <script src="js/functions-courses.js"></script>
   </body>
 </html>
