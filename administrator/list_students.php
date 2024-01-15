@@ -8,7 +8,7 @@ require_once 'includes/modals/modal_student.php';
   <div class="app-title">
     <div>
       <h1><i class="bi bi-speedometer"></i> Lista de Alumnos</h1>
-      <button class="btn btn-success" type="button" onclick="openModalTeacher()">Nuevo Alumno</button>
+      <button class="btn btn-success" type="button" onclick="openModalStudent()">Nuevo Alumno</button>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -32,6 +32,7 @@ require_once 'includes/modals/modal_student.php';
                   <th>Celular</th>
                   <th>Correo Electronico</th>
                   <th>Fecha Nacimiento</th>
+                  <th>Registro</th>
                   <th>Estado</th>
                 </tr>
               </thead>

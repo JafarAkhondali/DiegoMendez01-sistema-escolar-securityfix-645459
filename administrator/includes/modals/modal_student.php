@@ -36,6 +36,10 @@
 						<input type="email" class="form-control" id="email" name="email" />
 					</div>
 					<div class="form-group">
+						<label for="control-label" class="col-form-label">Fecha Nacimiento:</label>
+						<input type="date" class="form-control" id="birthdate" name="birthdate" />
+					</div>
+					<div class="form-group">
 						<label for="is_active" class="col-form-label">Estado:</label>
 						<select class="form-control" name="is_active" id="is_active">
 							<option value="">.::Seleccionar::.</option>
