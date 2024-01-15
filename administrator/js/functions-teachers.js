@@ -1,26 +1,28 @@
-$('#tableusers').DataTable();
+$('#tableteachers').DataTable();
 
-var tableusers;
+var tableteachers;
 
 document.addEventListener('DOMContentLoaded', function(){
-	tableusers = $('#tableusers').DataTable({
+	tableteachers = $('#tableteachers').DataTable({
 		"aProcessing": true,
 		"aServerSide": true,
 		"language": {
 			"url": "http://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
 		},
 		"ajax": {
-			"url": "./models/users/table_users.php",
-			"dataSrc": ""
+			"url": "./models/teachers/table_teachers.php",
+			"dataSrc": "",
 		},
 		"columns": [
 			{"data": "acciones"},
 			{"data": "id"},
 			{"data": "name"},
-			{"data": "user"},
-			{"data": "nameRol"},
-			{"data": "is_active"},
-			{"data": "created"}
+			{"data": "address"},
+			{"data": "identification"},
+			{"data": "phone"},
+			{"data": "email"},
+			{"data": "level"},
+			{"data": "is_active"}
 		],
 		"responsive": true,
 		"bDestroy": true,
@@ -28,25 +30,28 @@ document.addEventListener('DOMContentLoaded', function(){
 		"order": [[0, "asc"]]
 	});
 	
-	var formUser = document.querySelector('#formUser');
-	formUser.onsubmit = function(e){
+	var formTeacher = document.querySelector('#formTeacher');
+	formTeacher.onsubmit = function(e){
 		e.preventDefault();
 		
-		var id            = document.querySelector('#id').value;
-		var name          = document.querySelector('#name').value;
-		var user          = document.querySelector('#user').value;
-		var password_hash = document.querySelector('#password_hash').value;
-		var role_id       = document.querySelector('#role_id').value;
-		var is_active     = document.querySelector('#is_active').value;
+		var id            	= document.querySelector('#id').value;
+		var name          	= document.querySelector('#name').value;
+		var address       	= document.querySelector('#address').value;
+		var identification 	= document.querySelector('#identification').value;
+		var password 	    = document.querySelector('#password').value;
+		var phone       	= document.querySelector('#phone').value;
+		var email       	= document.querySelector('#email').value;
+		var level       	= document.querySelector('#level').value;
+		var is_active     	= document.querySelector('#is_active').value;
 		
-		if(name == '' || user == ''){
+		if(name == '' || address == '' || identification == '' || phone == '' || email == '' || level == ''){
 			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
 			return false;
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-		var url     = './models/users/ajax_users.php';
-		var form    = new FormData(formUser);
+		var url     = './models/teachers/ajax_teachers.php';
+		var form    = new FormData(formTeacher);
 		
 		request.open('POST', url, true);
 		request.send(form);
@@ -54,10 +59,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(request.readyState == 4 && request.status == 200){
 				var data = JSON.parse(request.responseText);
 				if(data.status){
-					$('#modalUser').modal('hide');
-					Swal.fire('Usuario', data.msg, 'success');
-					formUser.reset();
-					tableusers.ajax.reload();
+					$('#modalTeacher').modal('hide');
+					Swal.fire('Profesor', data.msg, 'success');
+					formTeacher.reset();
+					tableteachers.ajax.reload();
 				}else{
 					Swal.fire('Atencion', data.msg, 'error');
 				}
@@ -66,24 +71,24 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 });
 
-function openModalUser()
+function openModalTeacher()
 {
 	document.querySelector('#id').value = '';
-	document.querySelector('#tituloModal').innerHTML = 'Nuevo Usuario';
+	document.querySelector('#tituloModal').innerHTML = 'Nuevo Profesor';
 	document.querySelector('#action').innerHTML = 'Guardar';
-	document.querySelector('#formUser').reset();
-	$('#modalUser').modal('show');
+	document.querySelector('#formTeacher').reset();
+	$('#modalTeacher').modal('show');
 }
 
-function editUser(id)
+function editTeacher(id)
 {
-	var idUser = id;
+	var idTeacher = id;
 	
-	document.querySelector('#tituloModal').innerHTML = 'Actualizar Usuario';
+	document.querySelector('#tituloModal').innerHTML = 'Actualizar Profesor';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/users/edit_users.php?id='+idUser;
+	var url     = './models/teachers/edit_teachers.php?id='+idTeacher;
 	
 	request.open('GET', url, true);
 	request.send();
@@ -91,13 +96,16 @@ function editUser(id)
 		if(request.readyState == 4 && request.status == 200){
 			var data = JSON.parse(request.responseText);
 			if(data.status){
-				document.querySelector('#idUser').value = data.data.id;
+				document.querySelector('#id').value = data.data.id;
 				document.querySelector('#name').value = data.data.name;
-				document.querySelector('#user').value = data.data.user;
-				document.querySelector('#role_id').value = data.data.role_id;
+				document.querySelector('#address').value = data.data.address;
+				document.querySelector('#identification').value = data.data.identification;
+				document.querySelector('#phone').value = data.data.phone;
+				document.querySelector('#email').value = data.data.email;
+				document.querySelector('#level').value = data.data.level;
 				document.querySelector('#is_active').value = data.data.is_active;
 				
-				$('#modalUser').modal('show');
+				$('#modalTeacher').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -105,31 +113,31 @@ function editUser(id)
 	}
 }
 
-function deleteUser(id)
+function deleteTeacher(id)
 {
-	var idUser = id;
+	var idTeacher = id;
 	
 	Swal.fire({
-		title: "Eliminar Usuario",
-		text: "¿Realmente desea eliminar el usuario?",
+		title: "Eliminar Profesor",
+		text: "¿Realmente desea eliminar el profesor?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			var url = './models/users/delet_users.php';
+			var url = './models/teachers/delete_teachers.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idUser;
+			var strData = "id=" + idTeacher;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
 			        var data = JSON.parse(request.responseText);
 			        if (data.status) {
 			            Swal.fire('Eliminar', data.msg, 'success');
-			            tableusers.ajax.reload();
+			            tableteachers.ajax.reload();
 			        } else {
 			            Swal.fire('Atencion', data.msg, 'error');
 			        }

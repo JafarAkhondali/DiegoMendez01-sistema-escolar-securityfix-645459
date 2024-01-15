@@ -10,5 +10,6 @@
     <script src="../js/plugins/chart.js"></script>
     <script src="../js/plugins/jquery.dataTables.min.js"></script>
     <script src="js/functions-users.js"></script>
+    <script src="js/functions-teachers.js"></script>
   </body>
 </html>

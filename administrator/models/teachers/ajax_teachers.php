@@ -3,18 +3,21 @@
 require_once '../../../includes/connection.php';
 
 if(!empty($_POST)){
-    if(empty($_POST['name']) OR empty($_POST['user'])){
+    if(empty($_POST['name']) OR empty($_POST['address']) OR empty($_POST['identification']) OR empty($_POST['phone']) OR empty($_POST['email']) OR empty($_POST['level'])){
         $answer = [
             'status' => false,
             'msg'    => 'Todos los campos son requeridos'
         ];
     }else{
-        $id            = $_POST['id'];
-        $name          = $_POST['name'];
-        $user          = $_POST['user'];
-        $password      = $_POST['password_hash'];
-        $role_id       = $_POST['role_id'];
-        $is_active     = $_POST['is_active'];
+        $id             = $_POST['id'];
+        $name           = $_POST['name'];
+        $address        = $_POST['address'];
+        $identification = $_POST['identification'];
+        $password       = $_POST['password'];
+        $phone          = $_POST['phone'];
+        $email          = $_POST['email'];
+        $level          = $_POST['level'];
+        $is_active      = $_POST['is_active'];
         
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
@@ -22,65 +25,71 @@ if(!empty($_POST)){
             SELECT
                 *
             FROM
-                users
+                teachers
             WHERE
-                user = ? AND id != ? AND is_active != 0
+                identification = ? AND id != ? AND is_active != 0
         ';
         
         $query  = $pdo->prepare($sql);
-        $query->execute([$user, $id]);
+        $query->execute([$identification, $id]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
         if($result){
             $answer = [
                 'status' => false,
-                'msg'    => 'El usuario ya existe'
+                'msg'    => 'El profesor ya existe'
             ];
         }else{
             if(empty($id)){
                 $sqlInsert = '
                         INSERT INTO
-                            users (name, user, password_hash, role_id, is_active, created)
-                        VALUES (?, ?, ?, ?, ?, now())
+                            teachers (name, address, identification, password, phone, email, level, is_active, created)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, now())
                     ';
                 
                 $queryInsert  = $pdo->prepare($sqlInsert);
-                $request      = $queryInsert->execute([$name, $user, $password_hash, $role_id, $is_active]);
+                $request      = $queryInsert->execute([$name, $address, $identification, $password_hash, $phone, $email, $level, $is_active]);
                 $action       = 1;
             }else{
                 if(empty($password_hash)){
                     $sqlUpdate = '
                         UPDATE
-                            users 
+                            teachers 
                         SET
                             name = ?,
-                            user = ?,
-                            role_id = ?,
+                            address = ?,
+                            identification = ?,
+                            phone = ?,
+                            email = ?,
+                            level = ?,
                             is_active = ?
                         WHERE
                             id = ?
                     ';
                     
                     $queryUpdate  = $pdo->prepare($sqlUpdate);
-                    $request      = $queryUpdate->execute([$name, $user, $role_id, $is_active, $id]);
+                    $request      = $queryUpdate->execute([$name, $address, $identification, $phone, $email, $level, $is_active, $id]);
                     $action       = 2;
                 }else{
                     $sqlUpdate = '
                         UPDATE
-                            users
+                            teachers
                         SET
                             name = ?,
-                            user = ?,
-                            password_hash = ?,
-                            role_id = ?,
+                            address = ?,
+                            identification = ?,
+                            password = ?,
+                            phone = ?,
+                            email = ?,
+                            level = ?,
                             is_active = ?
                         WHERE
                             id = ?
                     ';
                     
                     $queryUpdate  = $pdo->prepare($sqlUpdate);
-                    $request      = $queryUpdate->execute([$name, $user, $password_hash, $role_id, $is_active, $id]);
-                    $action       = 3;
+                    $request      = $queryUpdate->execute([$name, $address, $identification, $password_hash, $phone, $email, $level, $is_active, $id]);
+                    $action       = 2;
                 }
             }
             
@@ -88,18 +97,18 @@ if(!empty($_POST)){
                 if($action == 1){
                     $answer = [
                         'status' => true,
-                        'msg'    => 'Usuario creado correctamente'
+                        'msg'    => 'Profesor creado correctamente'
                     ];
                 }else{
                     $answer = [
                         'status' => true,
-                        'msg'    => 'Usuario actualizado correctamente'
+                        'msg'    => 'Profesor actualizado correctamente'
                     ];
                 }
             }else{
                 $answer = [
                     'status' => false,
-                    'msg'    => 'Error al crear el usuario'
+                    'msg'    => 'Error al crear el profesor'
                 ];
             }
         }
