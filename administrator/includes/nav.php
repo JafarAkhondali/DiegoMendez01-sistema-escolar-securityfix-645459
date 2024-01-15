@@ -12,6 +12,8 @@
     class="app-menu__label">Usuarios</span></a></li>
     <li><a class="app-menu__item" href="list_teachers.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Profesores</span></a></li>
+    <li><a class="app-menu__item" href="list_students.php"><i class="app-menu__icon bi bi-code-square"></i><span
+    class="app-menu__label">Alumnos</span></a></li>
     <li><a class="app-menu__item" href="../logout.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Logout</span></a></li>
   </ul>
