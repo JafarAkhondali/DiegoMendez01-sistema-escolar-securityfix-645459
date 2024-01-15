@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Identificacion:</label>
-						<input type="text" class="form-control" id="password_hash" name="password_hash" />
+						<input type="text" class="form-control" id="identification" name="identification" />
 					</div>
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Clave:</label>

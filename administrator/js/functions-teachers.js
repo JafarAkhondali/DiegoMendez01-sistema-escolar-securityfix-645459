@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', function(){
 		var level       	= document.querySelector('#level').value;
 		var is_active     	= document.querySelector('#is_active').value;
 		
-		if(name == '' || address == ''){
+		if(name == '' || address == '' || identification == '' || phone == '' || email == '' || level == ''){
 			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
 			return false;
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-		var url     = './models/users/ajax_teachers.php';
+		var url     = './models/teachers/ajax_teachers.php';
 		var form    = new FormData(formTeacher);
 		
 		request.open('POST', url, true);
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 });
 
-function openModal()
+function openModalTeacher()
 {
 	document.querySelector('#id').value = '';
 	document.querySelector('#tituloModal').innerHTML = 'Nuevo Profesor';

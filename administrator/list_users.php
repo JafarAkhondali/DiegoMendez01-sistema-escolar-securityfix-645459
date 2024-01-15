@@ -8,7 +8,7 @@ require_once 'includes/modals/modals.php';
   <div class="app-title">
     <div>
       <h1><i class="bi bi-speedometer"></i> Lista de Usuarios</h1>
-      <button class="btn btn-success" type="button" onclick="openModal()">Nuevo Usuario</button>
+      <button class="btn btn-success" type="button" onclick="openModalUser()">Nuevo Usuario</button>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
