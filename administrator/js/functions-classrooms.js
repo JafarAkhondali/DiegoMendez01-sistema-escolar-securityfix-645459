@@ -69,16 +69,16 @@ function openModalClassroom()
 	document.querySelector('#formClassroom').reset();
 	$('#modalClassroom').modal('show');
 }
-/*
-function editStudent(id)
+
+function editClassroom(id)
 {
-	var idTeacher = id;
+	var idClassroom = id;
 	
-	document.querySelector('#tituloModal').innerHTML = 'Actualizar Alumno';
+	document.querySelector('#tituloModal').innerHTML = 'Actualizar Aula';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/students/edit_students.php?id='+idTeacher;
+	var url     = './models/classrooms/edit_classrooms.php?id='+idClassroom;
 	
 	request.open('GET', url, true);
 	request.send();
@@ -88,15 +88,9 @@ function editStudent(id)
 			if(data.status){
 				document.querySelector('#id').value = data.data.id;
 				document.querySelector('#name').value = data.data.name;
-				document.querySelector('#age').value = data.data.age;
-				document.querySelector('#address').value = data.data.address;
-				document.querySelector('#identification').value = data.data.identification;
-				document.querySelector('#phone').value = data.data.phone;
-				document.querySelector('#email').value = data.data.email;
-				document.querySelector('#birthdate').value = data.data.birthdate;
 				document.querySelector('#is_active').value = data.data.is_active;
 				
-				$('#modalStudent').modal('show');
+				$('#modalClassroom').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -104,31 +98,31 @@ function editStudent(id)
 	}
 }
 
-function deleteStudent(id)
+function deleteClassroom(id)
 {
-	var idStudent = id;
+	var idClassroom = id;
 	
 	Swal.fire({
-		title: "Eliminar Alumno",
-		text: "¿Realmente desea eliminar el alumno?",
+		title: "Eliminar Aula",
+		text: "¿Realmente desea eliminar la aula?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			var url = './models/students/delete_students.php';
+			var url = './models/classrooms/delete_classrooms.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idStudent;
+			var strData = "id=" + idClassroom;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
 			        var data = JSON.parse(request.responseText);
 			        if (data.status) {
 			            Swal.fire('Eliminar', data.msg, 'success');
-			            tablestudents.ajax.reload();
+			            tableclassrooms.ajax.reload();
 			        } else {
 			            Swal.fire('Atencion', data.msg, 'error');
 			        }
@@ -136,4 +130,4 @@ function deleteStudent(id)
 			};
 		}
 	});
-}*/
+}
