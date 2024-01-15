@@ -1,5 +1,5 @@
-<!--  MODAL USUARIOS  -->
-<div class="modal fade" id="modalUser" tabindex="-1" role="dialog" aria-hidden="true">
+<!--  MODAL PROFESORES  -->
+<div class="modal fade" id="modalTeacher" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
