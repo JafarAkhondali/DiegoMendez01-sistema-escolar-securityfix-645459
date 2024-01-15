@@ -16,5 +16,6 @@
     <script src="js/functions-degrees.js"></script>
     <script src="js/functions-courses.js"></script>
     <script src="js/functions-periods.js"></script>
+    <script src="js/functions-activities.js"></script>
   </body>
 </html>
