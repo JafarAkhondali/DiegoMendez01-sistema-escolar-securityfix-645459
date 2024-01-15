@@ -1,4 +1,4 @@
-<!--  MODAL ALUMNOS  -->
+<!--  MODAL AULAS  -->
 <div class="modal fade" id="modalClassroom" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
@@ -18,7 +18,6 @@
 					<div class="form-group">
 						<label for="is_active" class="col-form-label">Estado:</label>
 						<select class="form-control" name="is_active" id="is_active">
-							<option value="">.::Seleccionar::.</option>
 							<option value="1">Activo</option>
 							<option value="0">Inactivo</option>
 						</select>
