@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function(){
 			if(request.readyState == 4 && request.status == 200){
 				var data = JSON.parse(request.responseText);
 				if(data.status){
-					$('#modelDegree').modal('hide');
+					$('#modalDegree').modal('hide');
 					Swal.fire('Aula', data.msg, 'success');
 					formDegree.reset();
 					tabledegrees.ajax.reload();
@@ -69,16 +69,16 @@ function openModalDegree()
 	document.querySelector('#formDegree').reset();
 	$('#modalDegree').modal('show');
 }
-/*
-function editClassroom(id)
+
+function editDegree(id)
 {
-	var idClassroom = id;
+	var idDegree = id;
 	
-	document.querySelector('#tituloModal').innerHTML = 'Actualizar Aula';
+	document.querySelector('#tituloModal').innerHTML = 'Actualizar Grado';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/classrooms/edit_classrooms.php?id='+idClassroom;
+	var url     = './models/degrees/edit_degrees.php?id='+idDegree;
 	
 	request.open('GET', url, true);
 	request.send();
@@ -90,7 +90,7 @@ function editClassroom(id)
 				document.querySelector('#name').value = data.data.name;
 				document.querySelector('#is_active').value = data.data.is_active;
 				
-				$('#modalClassroom').modal('show');
+				$('#modalDegree').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -98,31 +98,31 @@ function editClassroom(id)
 	}
 }
 
-function deleteClassroom(id)
+function deleteDegree(id)
 {
-	var idClassroom = id;
+	var idDegree = id;
 	
 	Swal.fire({
-		title: "Eliminar Aula",
-		text: "¿Realmente desea eliminar la aula?",
+		title: "Eliminar Grado",
+		text: "¿Realmente desea eliminar el grado?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			var url = './models/classrooms/delete_classrooms.php';
+			var url = './models/degrees/delete_degrees.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idClassroom;
+			var strData = "id=" + idDegree;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
 			        var data = JSON.parse(request.responseText);
 			        if (data.status) {
 			            Swal.fire('Eliminar', data.msg, 'success');
-			            tableclassrooms.ajax.reload();
+			            tabledegrees.ajax.reload();
 			        } else {
 			            Swal.fire('Atencion', data.msg, 'error');
 			        }
@@ -130,4 +130,4 @@ function deleteClassroom(id)
 			};
 		}
 	});
-}*/
+}
