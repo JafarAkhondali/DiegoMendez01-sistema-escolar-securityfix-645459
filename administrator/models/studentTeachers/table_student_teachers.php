@@ -38,8 +38,8 @@ for($i = 0; $i < count($consulta); $i++){
     }
     
     $consulta[$i]['acciones'] = '
-        <button class="btn btn-primary" title="Editar" onclick="editTeacherCourse('.$consulta[$i]['id'].')">Editar</button>
-        <button class="btn btn-danger" title="Eliminar" onclick="deleteTeacherCourse('.$consulta[$i]['id'].')">Eliminar</button>
+        <button class="btn btn-primary" title="Editar" onclick="editStudenTeacher('.$consulta[$i]['id'].')">Editar</button>
+        <button class="btn btn-danger" title="Eliminar" onclick="deleteStudentTeacher('.$consulta[$i]['id'].')">Eliminar</button>
     ';
 }
 
