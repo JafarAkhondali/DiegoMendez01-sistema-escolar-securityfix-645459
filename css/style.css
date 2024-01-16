@@ -94,3 +94,23 @@ input {
 .alert {
     color: red;
 }
+
+.app-sidebar__user-avatar{
+	width: 48px;
+	padding: 6px;
+	background: #fff;
+}
+
+.app .app-sidebar, .app .app-nav, .app .app-header{
+	background: #002126 !important;
+}
+
+.app-sidebar__toggle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.app-sidebar__toggle::before{
+	display: none;
+}
