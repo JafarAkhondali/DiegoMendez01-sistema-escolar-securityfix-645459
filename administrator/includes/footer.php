@@ -24,5 +24,6 @@
     <script src="js/functions-periods.js"></script>
     <script src="js/functions-activities.js"></script>
     <script src="js/functions-teacher-courses.js"></script>
+    <script src="js/functions-student-teachers.js"></script>
   </body>
 </html>

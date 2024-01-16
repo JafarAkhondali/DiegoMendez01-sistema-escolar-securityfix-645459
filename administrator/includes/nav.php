@@ -26,6 +26,8 @@
     class="app-menu__label">Actividades</span></a></li>
     <li><a class="app-menu__item" href="list_teacher_courses.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Materias Profesor</span></a></li>
+    <li><a class="app-menu__item" href="list_student_teachers.php"><i class="app-menu__icon bi bi-code-square"></i><span
+    class="app-menu__label">Alumnos Profesor</span></a></li>
     <li><a class="app-menu__item" href="../logout.php"><i class="app-menu__icon bi bi-code-square"></i><span
     class="app-menu__label">Logout</span></a></li>
   </ul>
