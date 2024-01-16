@@ -7,12 +7,12 @@ require_once 'includes/modals/modal_teacher_course.php';
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1><i class="bi bi-speedometer"></i> Lista de Profesores</h1>
-      <button class="btn btn-success" type="button" onclick="openModalTeacher()">Nuevo Profesor</button>
+      <h1><i class="bi bi-speedometer"></i> Lista de Profesor Materia</h1>
+      <button class="btn btn-success" type="button" onclick="openModalTeacherCourse()">Nuevo Proceso</button>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
-      <li class="breadcrumb-item"><a href="#">lista de profesores</a></li>
+      <li class="breadcrumb-item"><a href="#">lista de profesor materias</a></li>
     </ul>
   </div>
   <div class="row">
@@ -20,17 +20,16 @@ require_once 'includes/modals/modal_teacher_course.php';
       <div class="tile">
         <div class="tile-body">
           <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="tableteachers">
+            <table class="table table-hover table-bordered" id="tableteachercourses">
               <thead>
                 <tr>
                   <th>Acciones</th>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Direccion</th>
-                  <th>Identificacion</th>
-                  <th>Celular</th>
-                  <th>Correo Electronico</th>
-                  <th>Nivel Estudio</th>
+                  <th>Grado</th>
+                  <th>Aula</th>
+                  <th>Materia</th>
+                  <th>Periodo</th>
                   <th>Estado</th>
                 </tr>
               </thead>
