@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		"columns": [
 			{"data": "acciones"},
 			{"data": "id"},
-			{"data": "teacher_id"},
-			{"data": "degree_id"},
-			{"data": "classroom_id"},
-			{"data": "course_id"},
-			{"data": "period_id"},
+			{"data": "nameTeacher"},
+			{"data": "nameDegree"},
+			{"data": "nameClassroom"},
+			{"data": "nameCourse"},
+			{"data": "namePeriod"},
 			{"data": "is_active"}
 		],
 		"dom": "lBfrtip",
@@ -106,16 +106,115 @@ function openModalTeacherCourse()
 	document.querySelector('#formTeacherCourse').reset();
 	$('#modalTeacherCourse').modal('show');
 }
-/*
-function editTeacher(id)
+
+window.addEventListener('load', function(){
+	showTeacher();
+	showDegree();
+	showClassroom();
+	showCourse();
+	showPeriod();
+}, false);
+
+function showTeacher()
 {
-	var idTeacher = id;
+	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+	var url     = './models/options/option_teachers.php';
 	
-	document.querySelector('#tituloModal').innerHTML = 'Actualizar Profesor';
+	request.open('POST', url, true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			var data = JSON.parse(request.responseText);
+			data.forEach(function(valor){
+				data += '<option value="'+valor.id+'">'+valor.name+'</option>';
+			});
+			document.querySelector('#teacher_id').innerHTML = data;
+		}
+	}
+}
+
+function showDegree()
+{
+	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+	var url     = './models/options/option_degrees.php';
+	
+	request.open('POST', url, true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			var data = JSON.parse(request.responseText);
+			data.forEach(function(valor){
+				data += '<option value="'+valor.id+'">'+valor.name+'</option>';
+			});
+			document.querySelector('#degree_id').innerHTML = data;
+		}
+	}
+}
+
+function showClassroom()
+{
+	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+	var url     = './models/options/option_classrooms.php';
+	
+	request.open('POST', url, true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			var data = JSON.parse(request.responseText);
+			data.forEach(function(valor){
+				data += '<option value="'+valor.id+'">'+valor.name+'</option>';
+			});
+			document.querySelector('#classroom_id').innerHTML = data;
+		}
+	}
+}
+
+function showCourse()
+{
+	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+	var url     = './models/options/option_courses.php';
+	
+	request.open('POST', url, true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			var data = JSON.parse(request.responseText);
+			data.forEach(function(valor){
+				data += '<option value="'+valor.id+'">'+valor.name+'</option>';
+			});
+			document.querySelector('#course_id').innerHTML = data;
+		}
+	}
+}
+
+function showPeriod()
+{
+	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+	var url     = './models/options/option_periods.php';
+	
+	request.open('POST', url, true);
+	request.send();
+	request.onreadystatechange = function(){
+		if(request.readyState == 4 && request.status == 200){
+			var data = JSON.parse(request.responseText);
+			data.forEach(function(valor){
+				data += '<option value="'+valor.id+'">'+valor.name+'</option>';
+			});
+			document.querySelector('#period_id').innerHTML = data;
+		}
+	}
+}
+
+
+function editTeacherCourse(id)
+{
+	var idTeacherCourse = id;
+	
+	document.querySelector('#tituloModal').innerHTML = 'Actualizar Profesor Materia';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/teachers/edit_teachers.php?id='+idTeacher;
+	var url     = './models/teacherCourses/edit_teacher_courses.php?id='+idTeacherCourse;
 	
 	request.open('GET', url, true);
 	request.send();
@@ -124,15 +223,14 @@ function editTeacher(id)
 			var data = JSON.parse(request.responseText);
 			if(data.status){
 				document.querySelector('#id').value = data.data.id;
-				document.querySelector('#name').value = data.data.name;
-				document.querySelector('#address').value = data.data.address;
-				document.querySelector('#identification').value = data.data.identification;
-				document.querySelector('#phone').value = data.data.phone;
-				document.querySelector('#email').value = data.data.email;
-				document.querySelector('#level').value = data.data.level;
+				document.querySelector('#teacher_id').value = data.data.teacher_id;
+				document.querySelector('#degree_id').value = data.data.degree_id;
+				document.querySelector('#classroom_id').value = data.data.classroom_id;
+				document.querySelector('#course_id').value = data.data.course_id;
+				document.querySelector('#period_id').value = data.data.period_id;
 				document.querySelector('#is_active').value = data.data.is_active;
 				
-				$('#modalTeacher').modal('show');
+				$('#modalTeacherCourse').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -140,31 +238,31 @@ function editTeacher(id)
 	}
 }
 
-function deleteTeacher(id)
+function deleteTeacherCourse(id)
 {
-	var idTeacher = id;
+	var idTeacherCourse = id;
 	
 	Swal.fire({
-		title: "Eliminar Profesor",
-		text: "¿Realmente desea eliminar el profesor?",
+		title: "Eliminar Profesor Materia",
+		text: "¿Realmente desea eliminar el proceso?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-			var url = './models/teachers/delete_teachers.php';
+			var url = './models/teacherCourses/delete_teacher_courses.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idTeacher;
+			var strData = "id=" + idTeacherCourse;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
 			        var data = JSON.parse(request.responseText);
 			        if (data.status) {
 			            Swal.fire('Eliminar', data.msg, 'success');
-			            tableteachers.ajax.reload();
+			            tableteachercourses.ajax.reload();
 			        } else {
 			            Swal.fire('Atencion', data.msg, 'error');
 			        }
@@ -172,4 +270,4 @@ function deleteTeacher(id)
 			};
 		}
 	});
-}*/
+}

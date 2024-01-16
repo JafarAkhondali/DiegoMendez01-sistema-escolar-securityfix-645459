@@ -4,7 +4,13 @@ require_once '../../../includes/connection.php';
 
 $sql = '
     SELECT
-        *
+        tc.id,
+        t.name as nameTeacher,
+        d.name as nameDegree,
+        c.name as nameClassroom,
+        cs.name as nameCourse,
+        p.name as namePeriod,
+        tc.is_active
     FROM
         teacher_courses as tc
     INNER JOIN teachers t ON tc.teacher_id = t.id

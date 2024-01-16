@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'includes/header.php';
-require_once 'includes/modals/modal_teacher_course.php';
+require_once 'includes/modals/modal_teacher.php';
 
 ?>
 <main class="app-content">
