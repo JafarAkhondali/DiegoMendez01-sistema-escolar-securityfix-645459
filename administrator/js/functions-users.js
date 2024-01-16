@@ -91,7 +91,7 @@ function editUser(id)
 		if(request.readyState == 4 && request.status == 200){
 			var data = JSON.parse(request.responseText);
 			if(data.status){
-				document.querySelector('#idUser').value = data.data.id;
+				document.querySelector('#id').value = data.data.id;
 				document.querySelector('#name').value = data.data.name;
 				document.querySelector('#user').value = data.data.user;
 				document.querySelector('#role_id').value = data.data.role_id;
