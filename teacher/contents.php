@@ -6,6 +6,7 @@ if(!empty($_GET['course'])){
 }
 require_once 'includes/header.php';
 require_once '../includes/connection.php';
+require_once '../includes/functions.php';
 require_once 'includes/modals/modal_content.php';
 
 $id = $_SESSION['id'];
@@ -71,7 +72,7 @@ $row = $query->rowCount();
             <div class="input-group-prepend">
               <div class="input-group-text" style="height: 36px;"><i class="fas fa-download"></i></div>
             </div>
-            <a class="btn btn-primary" href="teacher/teacher/<?= $data['material']; ?>" target="_blank">Material de Descarga</a>
+            <a class="btn btn-primary" href="BASE_URL<?= $data['material']; ?>" target="_blank">Material de Descarga</a>
           </div>
         </div>
       </div>
