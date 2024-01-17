@@ -59,7 +59,7 @@ function editContent(id)
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/contents/edit_contents.php?id='+idContents;
+	var url     = './models/contents/edit_contents.php?id='+idContent;
 	request.open('GET', url, true);
 	request.send();
 	request.onreadystatechange = function(){
@@ -81,5 +81,33 @@ function editContent(id)
 
 function deleteContent(id)
 {
+	var idContent = id;
 	
+	Swal.fire({
+		title: "Eliminar Contenido",
+		text: "¿Realmente desea eliminar el contenido?",
+		showDenyButton: true,
+		confirmButtonText: "Si, eliminar",
+		denyButtonText: `No, cancelar`
+	}).then((result) => {
+		if(result.isConfirmed){
+			var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
+			var url     = './models/contents/delete_contents.php';
+			
+			request.open('POST', url, true);
+			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
+			var strData = "id=" + idContent;
+			request.send(strData);
+			request.onreadystatechange = function () {
+			    if (request.readyState == 4 && request.status == 200) {
+			        var data = JSON.parse(request.responseText);
+			        if (data.status) {
+			            location.reload();
+			        }else{
+			            Swal.fire('Atencion', data.msg, 'error');
+			        }
+			    }
+			};
+		}
+	});
 }

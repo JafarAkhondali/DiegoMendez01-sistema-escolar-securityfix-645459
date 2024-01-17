@@ -71,7 +71,7 @@ if(!empty($_POST)){
                         id = ?
                 ';
                     
-                    $queryUpdate = $pdo->prepare([$sqlUpdate]);
+                    $queryUpdate = $pdo->prepare($sqlUpdate);
                     $request     = $queryUpdate->execute([$title, $description, $idCourse, $id]);
                     $action = 2;
                 }else{
@@ -87,7 +87,7 @@ if(!empty($_POST)){
                         id = ?
                 ';
                     
-                    $queryUpdate = $pdo->prepare([$sqlUpdate]);
+                    $queryUpdate = $pdo->prepare($sqlUpdate);
                     $request     = $queryUpdate->execute([$title, $description, $destiny, $idCourse, $id]);
                     if($data['material'] != ''){
                         unlink($data['material']);
