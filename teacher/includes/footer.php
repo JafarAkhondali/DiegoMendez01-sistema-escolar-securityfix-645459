@@ -6,5 +6,6 @@
     <script src="../js/plugins/chart.js"></script>
     <script src="../js/plugins/jquery.dataTables.min.js"></script>
     <!-- Page specific javascripts-->
+    <script src="js/functions-contents.js"></script>
   </body>
 </html>
