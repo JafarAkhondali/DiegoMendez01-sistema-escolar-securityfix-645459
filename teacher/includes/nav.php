@@ -49,7 +49,7 @@ $row = $query->rowCount();
       if($row > 0){
           while($data = $query->fetch()){
               ?>
-              <li><a class="treeview-item" href="#<?= $data['id'] ?>"><i class="icon fas fa-circle"></i>
+              <li><a class="treeview-item" href="contents.php?course=<?= $data['id'] ?>"><i class="icon fas fa-circle"></i>
               <?= $data['nameCourse']; ?> - <?= $data['nameDegree']; ?> - <?= $data['nameClassroom'] ?></a></li>
               <?php
           }

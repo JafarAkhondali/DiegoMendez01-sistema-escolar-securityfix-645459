@@ -57,7 +57,7 @@ $row = $query->rowCount();
                   <button class="btn btn-danger icon-btn" onclick="deleteContent(<?= $data['id']; ?>)">
                        <i class="fas fa-delet"></i>Eliminar
                   </button>
-                  <a class="btn btn-warning icon-btn" href="assessment.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>">
+                  <a class="btn btn-warning icon-btn" href="assessments.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>">
                        <i class="fas fa-edit"></i>Asignar Evaluacion
                   </a>
                </p>
