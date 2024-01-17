@@ -10,5 +10,6 @@
     <script src="../js/plugins/jquery.dataTables.min.js"></script>
     <!-- Page specific javascripts-->
     <script src="js/functions-contents.js"></script>
+    <script src="js/functions-assessments.js"></script>
   </body>
 </html>

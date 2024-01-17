@@ -7,19 +7,26 @@ if(!empty($_GET['course']) AND !empty($_GET['content'])){
 }
 require_once 'includes/header.php';
 require_once '../includes/connection.php';
-//require_once 'includes/modals/modal_assessment.php';
+require_once 'includes/modals/modal_assessment.php';
 
 //ID del profesor
 $id = $_SESSION['id'];
 
 $sql = '
     SELECT
-        *,
-        date_format(date, "%d/%m/%Y") as date
+        tc.id as idTeacher,
+        a.id,
+        c.id as idContent,
+        DATE_FORMAT(a.date, "%d/%m/%Y") as date,
+        a.percentage,
+        a.description,
+        a.title
     FROM
-        assessments
+        assessments as a
+    INNER JOIN contents c ON a.content_id = c.id
+    INNER JOIN teacher_courses tc ON c.teacher_course_id = tc.id 
     WHERE
-        content_id = ?
+        a.content_id = ?
 ';
 
 $query = $pdo->prepare($sql);
@@ -55,7 +62,7 @@ $row = $query->rowCount();
                   <button class="btn btn-danger icon-btn" onclick="deleteAssessment(<?= $data['id']; ?>)">
                        <i class="fas fa-delet"></i>Eliminar
                   </button>
-                  <a class="btn btn-warning icon-btn" href="submittedAssessments.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>&assessment=<?= $data['id'] ?>">
+                  <a class="btn btn-warning icon-btn" href="submittedAssessments.php?course=<?= $data['idTeacher']; ?>&content=<?= $data['idContent']; ?>&assessment=<?= $data['id'] ?>">
                        <i class="fas fa-edit"></i>Ver Entregas
                   </a>
                </p>
