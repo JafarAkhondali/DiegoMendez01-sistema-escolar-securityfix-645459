@@ -50,7 +50,7 @@ $row = $query->rowCount();
                        <h4 class="card-title text-center"><?php echo $data['nameCourse']; ?></h4>
                        <h5 class="card-title">Grado <kbd class="bg-info"><?php echo $data['nameDegree']; ?></kbd> - Aula <kbd class="bg-info"><?php echo $data['nameClassroom']; ?></kbd></h5>
                        <a href="contents.php?course=<?= $data['id'] ?>" class="btn btn-primary">Acceder</a>
-                       <a href="#<?php $data['id']; ?>" class="btn btn-warning">Ver Alumnos</a>
+                       <a href="students.php?course=<?= $data['id'] ?>" class="btn btn-warning">Ver Alumnos</a>
                   </div>
              </div>
         </div>
