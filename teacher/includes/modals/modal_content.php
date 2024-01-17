@@ -1,5 +1,5 @@
 <!--  MODAL CONTENIDOS  -->
-<div class="modal fade" id="modalContents" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalContent" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -18,11 +18,11 @@
 					</div>
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Descripcion:</label>
-						<textarea id="description" name="description" rows="4"></textarea>
+						<textarea id="description" class="form-control" name="description" rows="4"></textarea>
 					</div>
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Adjuntar Material:</label>
-						<input type="file" class="form-control" id=""material"" name="material" />
+						<input type="file" class="form-control" id="material" name="material" />
 					</div>
 					<div class="modal-footer">
         				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
