@@ -12,8 +12,9 @@ $id = $_SESSION['id'];
 
 $sql = '
     SELECT
+        c.id,
         c.title,
-        tc.course_id
+        tc.id as idTeacherCourse
     FROM
         contents as c
     INNER JOIN teacher_courses tc ON c.teacher_course_id = tc.id
@@ -48,7 +49,7 @@ $row = $query->rowCount();
           <h3 class="title"><?= $data['title']; ?></h3>
           <p><button class="btn btn-info icon-btn" onclick="editContent(<?= $data['id']; ?>)"><i class="fas fa-edit">
           </i>Editar Contenido</button><button class="btn btn-danger icon-btn" onclick="deleteContent(<?= $data['id']; ?>)"><i class="fas fa-delet">
-          </i>Eliminar Contenido</button><a class="btn btn-warning icon-btn" href="assessment.php?course=<?= $data['course_id']; ?>&content=<?= $data['id']; ?>">
+          </i>Eliminar Contenido</button><a class="btn btn-warning icon-btn" href="assessment.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>">
           <i class="fas fa-edit"></i>Asignar Evaluacion</a></p>
         </div>
         <div class="title-body">
