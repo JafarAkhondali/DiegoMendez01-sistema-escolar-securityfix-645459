@@ -26,7 +26,7 @@ $sql = '
     INNER JOIN contents c ON a.content_id = c.id
     INNER JOIN teacher_courses tc ON c.teacher_course_id = tc.id 
     WHERE
-        a.content_id = ?
+        a.content_id = ? AND a.is_active = 1
 ';
 
 $query = $pdo->prepare($sql);

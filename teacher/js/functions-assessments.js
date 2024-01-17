@@ -53,15 +53,15 @@ function openModalAssessment()
 	$('#modalAssessment').modal('show');
 }
 
-/*function editContent(id)
+function editAssessment(id)
 {
-	idContent = id;
+	idAssessment = id;
 	
-	document.querySelector('#tituloModal').value = 'Actualizar Contenido';
+	document.querySelector('#tituloModal').value = 'Actualizar Evaluacion';
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/contents/edit_contents.php?id='+idContent;
+	var url     = './models/assessments/edit_assessments.php?id='+idAssessment;
 	request.open('GET', url, true);
 	request.send();
 	request.onreadystatechange = function(){
@@ -71,9 +71,10 @@ function openModalAssessment()
 				document.querySelector('#id').value = data.data.id;
 				document.querySelector('#title').value = data.data.title;
 				document.querySelector('#description').value = data.data.description;
-				//document.querySelector('#material').value = data.data.material;
+				document.querySelector('#date').value = data.data.date;
+				document.querySelector('#percentage').value = data.data.percentage;
 				
-				$('#modalContent').modal('show');
+				$('#modalAssessment').modal('show');
 			}else{
 				Swal.fire('Atencion', data.msg, 'error');
 			}
@@ -81,24 +82,24 @@ function openModalAssessment()
 	}
 }
 
-function deleteContent(id)
+function deleteAssessment(id)
 {
-	var idContent = id;
+	var idAssessment = id;
 	
 	Swal.fire({
-		title: "Eliminar Contenido",
-		text: "¿Realmente desea eliminar el contenido?",
+		title: "Eliminar Evaluacion",
+		text: "¿Realmente desea eliminar la evaluacion?",
 		showDenyButton: true,
 		confirmButtonText: "Si, eliminar",
 		denyButtonText: `No, cancelar`
 	}).then((result) => {
 		if(result.isConfirmed){
 			var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-			var url     = './models/contents/delete_contents.php';
+			var url     = './models/assessments/delete_assessments.php';
 			
 			request.open('POST', url, true);
 			request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // Configurar los encabezados antes de enviar
-			var strData = "id=" + idContent;
+			var strData = "id=" + idAssessment;
 			request.send(strData);
 			request.onreadystatechange = function () {
 			    if (request.readyState == 4 && request.status == 200) {
@@ -112,4 +113,4 @@ function deleteContent(id)
 			};
 		}
 	});
-}*/
+}

@@ -11,7 +11,7 @@ if($_POST){
         FROM
             contents
         WHERE
-            id = ?
+            id = ? AND is_active = 1
     ';
     
     $query = $pdo->prepare($sql);
@@ -24,7 +24,7 @@ if($_POST){
         FROM
             assessments
         WHERE
-            content_id = ?
+            content_id = ? AND is_active = 1
     ';
     
     $querys = $pdo->prepare($sql);
@@ -33,8 +33,10 @@ if($_POST){
     
     if(empty($data2)){
         $sqlUpdate = '
-            DELETE FROM
+            UPDATE
                 contents
+            SET
+                is_active = 0
             WHERE
                 id = ?
         ';
