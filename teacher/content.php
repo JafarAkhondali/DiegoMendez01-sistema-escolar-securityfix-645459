@@ -14,12 +14,14 @@ $sql = '
     SELECT
         c.id,
         c.title,
+        c.material,
+        c.description,
         tc.id as idTeacherCourse
     FROM
         contents as c
     INNER JOIN teacher_courses tc ON c.teacher_course_id = tc.id
     WHERE
-        tc.course_id = ?
+        tc.id = ?
 ';
 
 $query = $pdo->prepare($sql);
@@ -45,12 +47,21 @@ $row = $query->rowCount();
   ?>
     <div class="col-md-12">
       <div class="tile">
-        <div class="title-title-w-btn">
+        <div class="tile-title-w-btn">
           <h3 class="title"><?= $data['title']; ?></h3>
-          <p><button class="btn btn-info icon-btn" onclick="editContent(<?= $data['id']; ?>)"><i class="fas fa-edit">
-          </i>Editar Contenido</button><button class="btn btn-danger icon-btn" onclick="deleteContent(<?= $data['id']; ?>)"><i class="fas fa-delet">
-          </i>Eliminar Contenido</button><a class="btn btn-warning icon-btn" href="assessment.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>">
-          <i class="fas fa-edit"></i>Asignar Evaluacion</a></p>
+          <div class="btn-group">
+               <p>
+                  <button class="btn btn-info icon-btn" onclick="editContent(<?= $data['id']; ?>)">
+                       <i class="fas fa-edit"></i>Editar
+                  </button>
+                  <button class="btn btn-danger icon-btn" onclick="deleteContent(<?= $data['id']; ?>)">
+                       <i class="fas fa-delet"></i>Eliminar
+                  </button>
+                  <a class="btn btn-warning icon-btn" href="assessment.php?course=<?= $data['idTeacherCourse']; ?>&content=<?= $data['id']; ?>">
+                       <i class="fas fa-edit"></i>Asignar Evaluacion
+                  </a>
+               </p>
+          </div>
         </div>
         <div class="title-body">
           <b><?= $data['description']; ?></b>
@@ -58,7 +69,7 @@ $row = $query->rowCount();
         <div class="title-footer mt-4">
           <div class="input-group">
             <div class="input-group-prepend">
-              <div class="input-group-text"><i class="fas fa-download"></i></div>
+              <div class="input-group-text" style="height: 36px;"><i class="fas fa-download"></i></div>
             </div>
             <a class="btn btn-primary" href="teacher/teacher/<?= $data['material']; ?>" target="_blank">Material de Descarga</a>
           </div>

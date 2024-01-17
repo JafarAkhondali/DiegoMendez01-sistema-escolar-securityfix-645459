@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-		var url     = './models/content/ajax_contents.php';
+		var url     = './models/contents/ajax_contents.php';
 		var form    = new FormData(formContent);
 		
 		request.open('POST', url, true);
@@ -59,7 +59,7 @@ function editContent(id)
 	document.querySelector('#action').innerHTML = 'Actualizar';
 	
 	var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
-	var url     = './models/content/edit_contents.php?id='+idContents;
+	var url     = './models/contents/edit_contents.php?id='+idContents;
 	request.open('GET', url, true);
 	request.send();
 	request.onreadystatechange = function(){

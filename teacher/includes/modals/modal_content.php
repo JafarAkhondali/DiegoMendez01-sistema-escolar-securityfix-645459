@@ -11,7 +11,7 @@
 			<div class="modal-body">
 				<form id="formContent" name="formContent" enctype="multipart/form-data">
 					<input type="hidden" name="id" id="id" value="" />
-					<input type="hidden" name="idCourse" id="idCourse" value="<?= $course; ?>" />
+					<input type="hidden" name="idCourse" id="idCourse" value="<?= $courseId; ?>" />
 					<div class="form-group">
 						<label for="control-label" class="col-form-label">Titulo:</label>
 						<input type="text" class="form-control" id="title" name="title" />
