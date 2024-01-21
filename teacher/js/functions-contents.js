@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
-	var formContent = document.querySelector('#formContent');
-	formContent.onsubmit = function(e){
+	var formMark = document.querySelector('#formMark');
+	formMark.onsubmit = function(e){
 		e.preventDefault();
 		
 		var id          = document.querySelector('#id');
@@ -8,14 +8,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		var description = document.querySelector('#description');
 		var material    = document.querySelector('#material');
 		
-		if(title == '' || description == ''){
+		if(mark_value == ''){
 			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
 			return false;
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
 		var url     = './models/contents/ajax_contents.php';
-		var form    = new FormData(formContent);
+		var form    = new FormData(formMark);
 		
 		request.open('POST', url, true);
 		request.send(form);

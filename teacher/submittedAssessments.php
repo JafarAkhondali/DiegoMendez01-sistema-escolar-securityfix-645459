@@ -36,7 +36,7 @@ $sql2 = '
         s.id as idStudent,
         s.name as nameStudent,
         sa.observation,
-        c.material,
+        sa.material,
         sa.id
     FROM
         submitted_assessments as sa
@@ -55,8 +55,7 @@ $row2 = $query2->rowCount();
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1><i class="bi bi-speedometer"></i>Evaluaciones Entregadas</h1>
-      <button class="btn btn-success" type="button" onclick="openModalAssessment()">Nueva Evaluacion</button>
+      <h1><i class="bi bi-speedometer"></i> Evaluaciones Entregadas</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
@@ -115,8 +114,8 @@ $row2 = $query2->rowCount();
                 $cargue = '';
             }else{
                 require_once 'includes/modals/modal_mark.php';
-                $value  = '<kbd class="bg-success">Sin Calificar</kbd';
-                $cargue = '<button class="btn btn-warning" onclick="modalNota()">Cargar Nota</button>';
+                $value  = '<kbd class="bg-danger">Sin Calificar</kbd>';
+                $cargue = '<button class="btn btn-warning" onclick="openModalAssessment()">Cargar Nota</button>';
             }
   ?>
        <div class="col-md-12">

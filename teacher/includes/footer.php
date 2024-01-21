@@ -11,5 +11,6 @@
     <!-- Page specific javascripts-->
     <script src="js/functions-contents.js"></script>
     <script src="js/functions-assessments.js"></script>
+    <script src="js/functions-marks.js"></script>
   </body>
 </html>
