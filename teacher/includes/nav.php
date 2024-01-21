@@ -4,7 +4,6 @@ require_once '../includes/connection.php';
 
 $id = $_SESSION['id'];
 
-
 $sql = '
     SELECT
         tc.id,
@@ -25,6 +24,27 @@ $sql = '
 $query = $pdo->prepare($sql);
 $query->execute([$id]);
 $row = $query->rowCount();
+
+$sqlMark = '
+    SELECT
+        tc.id,
+        cs.name as nameCourse,
+        c.name as nameClassroom,
+        t.name as nameTeacher,
+        d.name as nameDegree
+    FROM
+        teacher_courses as tc
+    INNER JOIN degrees d ON tc.degree_id = d.id
+    INNER JOIN classrooms c ON tc.classroom_id = c.id
+    INNER JOIN teachers t ON tc.teacher_id = t.id
+    INNER JOIN courses cs ON tc.course_id = cs.id
+    WHERE
+        tc.is_active = 1 AND tc.teacher_id = ?
+';
+
+$queryMark = $pdo->prepare($sqlMark);
+$queryMark->execute([$id]);
+$rowMark = $queryMark->rowCount();
 ?>
 
 <!-- Sidebar menu-->
@@ -51,6 +71,25 @@ $row = $query->rowCount();
               ?>
               <li><a class="treeview-item" href="contents.php?course=<?= $data['id'] ?>"><i class="icon fas fa-circle"></i>
               <?= $data['nameCourse']; ?> - <?= $data['nameDegree']; ?> - <?= $data['nameClassroom'] ?></a></li>
+              <?php
+          }
+      }
+      ?>
+      </ul>
+    </li>
+    <li class="treeview">
+      <a class="app-menu__item" href="#" data-toggle="treeview">
+        <i class="app-menu__icon fas fa-laptop"></i>
+          <span class="app-menu__label">Mis Calificaciones</span>
+        <i class="treeview-indicator bi bi-chevron-right"></i>
+      </a>
+      <ul class="treeview-menu">
+      <?php 
+      if($rowMark > 0){
+          while($dataMark = $queryMark->fetch()){
+              ?>
+              <li><a class="treeview-item" href="marks.php?course=<?= $dataMark['id'] ?>"><i class="icon fas fa-circle"></i>
+              <?= $dataMark['nameCourse']; ?> - <?= $dataMark['nameDegree']; ?> - <?= $dataMark['nameClassroom'] ?></a></li>
               <?php
           }
       }

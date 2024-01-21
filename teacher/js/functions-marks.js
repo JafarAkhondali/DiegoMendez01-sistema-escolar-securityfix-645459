@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	}
 })
 
-function openModalAssessment()
+function openModalMark()
 {
 	$('#modalMark').modal('show');
 }

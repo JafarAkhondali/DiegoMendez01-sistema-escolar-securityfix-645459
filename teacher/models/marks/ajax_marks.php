@@ -14,7 +14,7 @@ if(!empty($_POST)){
         
         $sqlInsert = '
             INSERT INTO
-                marks (assessment_id, mark_value, date, created)
+                marks (submitted_assessment_id, mark_value, date, created)
             VALUES
                 (?, ?, now(), now())
         ';

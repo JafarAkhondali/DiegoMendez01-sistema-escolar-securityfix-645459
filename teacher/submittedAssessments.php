@@ -102,9 +102,9 @@ $row2 = $query2->rowCount();
                 FROM
                     marks
                 WHERE
-                    assessment_id = ?
+                    submitted_assessment_id = ?
             ';
-            
+            var_dump($submittedAssessment);
             $query3 = $pdo->prepare($sql3);
             $query3->execute([$submittedAssessment]);
             $data3  = $query3->rowCount();
@@ -115,7 +115,7 @@ $row2 = $query2->rowCount();
             }else{
                 require_once 'includes/modals/modal_mark.php';
                 $value  = '<kbd class="bg-danger">Sin Calificar</kbd>';
-                $cargue = '<button class="btn btn-warning" onclick="openModalAssessment()">Cargar Nota</button>';
+                $cargue = '<button class="btn btn-warning" onclick="openModalMark()">Cargar Nota</button>';
             }
   ?>
        <div class="col-md-12">
