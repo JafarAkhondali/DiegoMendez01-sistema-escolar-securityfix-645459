@@ -38,7 +38,7 @@ $row = $query->rowCount();
   <div class="app-title">
     <div>
       <h1><i class="bi bi-speedometer"></i>Asignar Evaluacion</h1>
-      <button class="btn btn-success" type="button" onclick="openModalAssessment()">Nueva Evaluacion</button>
+      <button type="button" class="btn btn-success" onclick="openModalAssessment()">Nuevo Contenido</button>
     </div>
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
