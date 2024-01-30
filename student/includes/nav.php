@@ -2,7 +2,6 @@
 
 require_once '../includes/connection.php';
 
-session_start();
 $idStudent = $_SESSION['id'];
 
 $sql = '
