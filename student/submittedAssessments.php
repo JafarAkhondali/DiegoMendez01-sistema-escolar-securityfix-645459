@@ -38,11 +38,11 @@ $sql2 = '
     FROM
         assessments a
     WHERE
-        a.content_id = ?
+        a.content_id = ? AND a.id = ?
 ';
 
 $query2 = $pdo->prepare($sql2);
-$query2->execute([$contentId]);
+$query2->execute([$contentId, $assessmentId]);
 $result = $query2->fetch();
 $dateLimit = $result['date'];
 
@@ -117,22 +117,25 @@ $dateLimit = $result['date'];
             		<div class="tile">
                         <h3 class="tile-title">Realizar entrega</h3>
                         <div class="tile-body">
-                          <form class="form-horizontal" id="formSubmitActivity">
+                          <form class="form-horizontal" id="formSubmittedAssessment" name="formSubmittedAssessment" enctype="multipart/form-data">
+                            <input type="hidden" name="assessment_id" id="assessment_id" value="<?= $assessmentId; ?>" />
+                            <input type="hidden" name="student_id" id="student_id" value="<?= $idStudent; ?>" />
                             <div class="mb-3 row">
                               <label class="form-label col-md-3">Descripción de la Actividad</label>
                               <div class="col-md-8">
-                                <textarea class="form-control" name="observation" id="observation" rows="4" placeholder="Enter your address"></textarea>
+                                <textarea class="form-control" name="observation" id="observation" rows="4" placeholder="Descripcion de la actividad"></textarea>
                               </div>
                             </div>
                             <div class="mb-3 row">
-                              <div class="col-md-12">
+                              <label class="form-label col-md-3">Adjuntar Material</label>
+                              <div class="col-md-8">
                                 <input type="file" name="file" id="file" class="form-control">
                               </div>
                             </div>
                             <div class="tile-footer">
                               <div class="row">
                                 <div class="col-md-8 col-md-offset-3">
-                                  <button class="btn btn-primary" type="button"><i class="bi bi-check-circle-fill me-2"></i>Enviar</button>
+                                  <button class="btn btn-primary" type="submit"><i class="bi bi-check-circle-fill me-2"></i>Enviar</button>
                                 </div>
                               </div>
                             </div>
