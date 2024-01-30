@@ -2,49 +2,31 @@
 
 require_once '../includes/connection.php';
 
+session_start();
 $idStudent = $_SESSION['id'];
 
 $sql = '
     SELECT
         tc.id,
-        cs.name as nameCourse,
-        c.name as nameClassroom,
-        t.name as nameTeacher,
-        d.name as nameDegree
+        c.name as nameCourse,
+        d.name as nameDegree,
+        cs.name as nameClassroom
     FROM
-        teacher_courses as tc
+        student_teachers as st
+    INNER JOIN students s ON st.student_id = s.id
+    INNER JOIN teacher_courses tc ON st.teacher_course_id = tc.id
     INNER JOIN degrees d ON tc.degree_id = d.id
-    INNER JOIN classrooms c ON tc.classroom_id = c.id
     INNER JOIN teachers t ON tc.teacher_id = t.id
-    INNER JOIN courses cs ON tc.course_id = cs.id
+    INNER JOIN courses c ON tc.course_id = c.id
+    INNER JOIN classrooms cs ON tc.classroom_id = cs.id
     WHERE
-        tc.is_active = 1 AND tc.teacher_id = ?
+        s.id = ? AND st.is_active = 1
 ';
 
 $query = $pdo->prepare($sql);
-$query->execute([$id]);
-$row = $query->rowCount();
+$query->execute([$idStudent]);
+$row   = $query->rowCount();
 
-$sqlMark = '
-    SELECT
-        tc.id,
-        cs.name as nameCourse,
-        c.name as nameClassroom,
-        t.name as nameTeacher,
-        d.name as nameDegree
-    FROM
-        teacher_courses as tc
-    INNER JOIN degrees d ON tc.degree_id = d.id
-    INNER JOIN classrooms c ON tc.classroom_id = c.id
-    INNER JOIN teachers t ON tc.teacher_id = t.id
-    INNER JOIN courses cs ON tc.course_id = cs.id
-    WHERE
-        tc.is_active = 1 AND tc.teacher_id = ?
-';
-
-$queryMark = $pdo->prepare($sqlMark);
-$queryMark->execute([$id]);
-$rowMark = $queryMark->rowCount();
 ?>
 
 <!-- Sidebar menu-->
@@ -53,7 +35,7 @@ $rowMark = $queryMark->rowCount();
   <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User Image">
     <div>
       <p class="app-sidebar__user-name"><?php echo $_SESSION['name']; ?></p>
-      <p class="app-sidebar__user-designation">Profesor</p>
+      <p class="app-sidebar__user-designation">Alumno</p>
     </div>
   </div>
   <ul class="app-menu">

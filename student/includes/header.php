@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-if(empty($_SESSION['is_teacher'])){
+if(empty($_SESSION['is_student'])){
     header('Location: ../');
 }
 
