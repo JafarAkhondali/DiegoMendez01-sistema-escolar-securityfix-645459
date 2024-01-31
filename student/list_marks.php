@@ -9,8 +9,8 @@ require_once 'includes/header.php';
 require_once '../includes/connection.php';
 require_once '../includes/functions.php';
 
-// ID profesor
-$id = $_SESSION['id'];
+// ID alumno
+$idStudent = $_SESSION['id'];
 
 $sql = '
     SELECT
@@ -29,7 +29,7 @@ $sql = '
 ';
 
 $query = $pdo->prepare($sql);
-$query->execute([$studentId, $courseId]);
+$query->execute([$idStudent, $courseId]);
 $row = $query->rowCount();
 
 ?>

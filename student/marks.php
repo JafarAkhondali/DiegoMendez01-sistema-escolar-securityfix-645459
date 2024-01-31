@@ -1,35 +1,30 @@
-<?php
-if(!empty($_GET['course']) AND !empty($_GET['student'])){
-    $courseId  = $_GET['course'];
-    $studentId = $_GET['student'];
+<?php 
+if(!empty($_GET['course'])){
+    $courseId = $_GET['course'];
 }else{
     header("Location: teacher/");
 }
 require_once 'includes/header.php';
 require_once '../includes/connection.php';
-require_once '../includes/functions.php';
 
-// ID profesor
-$id = $_SESSION['id'];
+// ID alumno
+$idStudent = $_SESSION['id'];
 
 $sql = '
     SELECT
-        c.title,
-        m.mark_value,
-        a.title as titleAssessment
+        s.id as idStudent,
+        s.name as nameStudent,
+        tc.id as idTeacherCourse
     FROM
-        marks as m
-    INNER JOIN submitted_assessments sa ON m.submitted_assessment_id = sa.id
-    INNER JOIN students s ON sa.student_id = s.id
-    INNER JOIN assessments a ON sa.assessment_id = a.id
-    INNER JOIN contents c ON a.content_id = c.id
-    INNER JOIN teacher_courses tc ON c.teacher_course_id = tc.id
+        student_teachers as st
+    INNER JOIN teacher_courses tc ON st.teacher_course_id = tc.id
+    INNER JOIN students s ON st.student_id = s.id
     WHERE
-        s.id = ? AND tc.id = ?
+        s.id = ? AND tc.id = ? GROUP BY s.id
 ';
 
 $query = $pdo->prepare($sql);
-$query->execute([$studentId, $courseId]);
+$query->execute([$idStudent, $courseId]);
 $row = $query->rowCount();
 
 ?>
@@ -51,9 +46,8 @@ $row = $query->rowCount();
             	<table class="table table-hover table-bordered">
             		<thead>
             			<tr>
-            				<th>Tema</th>
-            				<th>Actividad</th>
-            				<th>Notas</th>
+            				<th>Alumno</th>
+            				<th>Ver Notas</th>
             			</tr>
             		</thead>
             		<tbody>
@@ -62,9 +56,12 @@ $row = $query->rowCount();
                           while($data = $query->fetch()){
                       ?>
                       <tr>
-                      	<td><?= $data['title'] ?></td>
-                      	<td><?= $data['titleAssessment'] ?></td>
-                      	<td><?= $data['mark_value'] ?></td>
+                      	<td><?= $data['nameStudent'] ?></td>
+                      	<td>
+                      		<a class="btn btn-primary btn-sm" title="Ver Notas" href="list_marks.php?student=<?= $data['idStudent'] ?>&course=<?= $data['idTeacherCourse'] ?>">
+                      			<i class="fas fa-list"></i>
+                      		</a>
+                      	</td>
                       </tr>
                       <?php 
                           }
@@ -78,16 +75,7 @@ $row = $query->rowCount();
     </div>
   </div>
   <div class="row">
-  	<div class="col-lg-12">
-  		<div class="bs-component">
-  			<ul class="list-group">
-  				<li class="list-group-item"><span class="tag tag-default tag-pill float-xs-right"><strong>PROMEDIO: <?= formato(promedio($studentId)) ?></strong></span></li>
-  			</ul>
-  		</div>
-  	</div>
-  </div>
-  <div class="row mt-3">
-    <a href="marks.php?course=<?= $courseId ?>" class="btn btn-info">Volver Atras</a>
+    <a href="index.php" class="btn btn-info">Volver Atras</a>
   </div>
 </main>
 <?php 

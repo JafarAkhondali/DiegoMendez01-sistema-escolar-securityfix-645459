@@ -26,6 +26,28 @@ $query = $pdo->prepare($sql);
 $query->execute([$idStudent]);
 $row   = $query->rowCount();
 
+$sqlMark = '
+    SELECT
+        tc.id,
+        cs.name as nameCourse,
+        c.name as nameClassroom,
+        t.name as nameTeacher,
+        d.name as nameDegree
+    FROM
+        student_teachers as st
+    INNER JOIN students s ON st.student_id = s.id
+    INNER JOIN teacher_courses tc ON st.teacher_course_id = tc.id
+    INNER JOIN degrees d ON tc.degree_id = d.id
+    INNER JOIN teachers t ON tc.teacher_id = t.id
+    INNER JOIN courses c ON tc.course_id = c.id
+    INNER JOIN classrooms cs ON tc.classroom_id = cs.id
+    WHERE
+        s.id = ? AND st.is_active = 1
+';
+
+$queryMark = $pdo->prepare($sqlMark);
+$queryMark->execute([$idStudent]);
+$rowMark = $queryMark->rowCount();
 ?>
 
 <!-- Sidebar menu-->
