@@ -5,6 +5,8 @@ if(!empty($_SESSION['is_teacher'])){
     header('Location: teacher/');
 }elseif(!empty($_SESSION['is_user'])){
     header('Location: administrator/');
+}elseif(!empty($_SESSION['is_student'])){
+    header('Location: student/');
 }
 
 ?>
@@ -37,6 +39,10 @@ if(!empty($_SESSION['is_teacher'])){
 					<a class="nav-link" id="teacher-tab" data-toggle="tab" href="#teacher" role="tab" aria-controls="teacher"
 					aria-selected="false">Profesor</a>
 				</li>
+				<li class="nav-item" role="presentation">
+					<a class="nav-link" id="student-tab" data-toggle="tab" href="#student" role="tab" aria-controls="student"
+					aria-selected="false">Alumno</a>
+				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -57,6 +63,16 @@ if(!empty($_SESSION['is_teacher'])){
         				<input type="text" name="password" id="password" placeholder="Clave de Seguridad" />
         				<div id="messageTeacher"></div>
         				<button id="loginTeacher" type="button">Iniciar Sesión</button>
+        			</form>
+				</div>
+				<div class="tab-pane fade" id="student" role="tabpanel" aria-labelledby="student-tab">
+    				<form action="" onSubmit="return validar()">
+        				<label for="identificationStudent">Usuario</label>
+        				<input type="text" name="identificationStudent" id="identificationStudent" placeholder="Numero Identificacion" />
+        				<label for="passwordStudent">Clave</label>
+        				<input type="text" name="passwordStudent" id="passwordStudent" placeholder="Clave de Seguridad" />
+        				<div id="messageStudent"></div>
+        				<button id="loginStudent" type="button">Iniciar Sesión</button>
         			</form>
 				</div>
 			</div>

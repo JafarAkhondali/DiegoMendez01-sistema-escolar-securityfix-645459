@@ -28,13 +28,13 @@ if(!empty($_POST)){
         
         // Consulta actualizar
         $sql = '
-        SELECT
-            *
-        FROM
-            contents
-        WHERE
-            id = ?
-    ';
+            SELECT
+                *
+            FROM
+                contents
+            WHERE
+                id = ?
+        ';
         
         $query = $pdo->prepare($sql);
         $query->execute([$id]);
