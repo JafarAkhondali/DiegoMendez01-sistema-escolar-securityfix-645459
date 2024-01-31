@@ -48,7 +48,7 @@ if(!empty($_POST)){
                 $request      = $queryInsert->execute([$name, $user, $password_hash, $role_id, $is_active]);
                 $action       = 1;
             }else{
-                if(empty($password_hash)){
+                if(empty($password)){
                     $sqlUpdate = '
                         UPDATE
                             users 

@@ -28,6 +28,10 @@
 						<input type="text" class="form-control" id="identification" name="identification" />
 					</div>
 					<div class="form-group">
+						<label for="control-label" class="col-form-label">Clave:</label>
+						<input type="password" class="form-control" id="password" name="password" />
+					</div>
+					<div class="form-group">
 						<label for="control-label" class="col-form-label">Celular:</label>
 						<input type="text" class="form-control" id="phone" name="phone" />
 					</div>

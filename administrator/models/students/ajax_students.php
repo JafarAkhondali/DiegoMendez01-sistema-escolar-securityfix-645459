@@ -14,10 +14,13 @@ if(!empty($_POST)){
         $age            = $_POST['age'];
         $address        = $_POST['address'];
         $identification = $_POST['identification'];
+        $password       = $_POST['password'];
         $phone          = $_POST['phone'];
         $email          = $_POST['email'];
         $birthdate      = $_POST['birthdate'];
         $is_active      = $_POST['is_active'];
+        
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
         $sql = '
             SELECT
@@ -41,33 +44,56 @@ if(!empty($_POST)){
             if(empty($id)){
                 $sqlInsert = '
                         INSERT INTO
-                            students (name, age, address, identification, phone, email, birthdate, is_active, created)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, now())
+                            students (name, age, address, identification, password, phone, email, birthdate, is_active, created)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, now())
                     ';
                 
                 $queryInsert  = $pdo->prepare($sqlInsert);
-                $request      = $queryInsert->execute([$name, $age, $address, $identification, $phone, $email, $birthdate, $is_active]);
+                $request      = $queryInsert->execute([$name, $age, $address, $identification, $password_hash, $phone, $email, $birthdate, $is_active]);
                 $action       = 1;
             }else{
-                $sqlUpdate = '
-                    UPDATE
-                        students 
-                    SET
-                        name = ?,
-                        age  = ?,
-                        address = ?,
-                        identification = ?,
-                        phone = ?,
-                        email = ?,
-                        birthdate = ?,
-                        is_active = ?
-                    WHERE
-                        id = ?
-                ';
-                
-                $queryUpdate  = $pdo->prepare($sqlUpdate);
-                $request      = $queryUpdate->execute([$name, $age, $address, $identification, $phone, $email, $birthdate, $is_active, $id]);
-                $action       = 2;
+                if(empty($password)){
+                    $sqlUpdate = '
+                        UPDATE
+                            students 
+                        SET
+                            name = ?,
+                            age  = ?,
+                            address = ?,
+                            identification = ?,
+                            phone = ?,
+                            email = ?,
+                            birthdate = ?,
+                            is_active = ?
+                        WHERE
+                            id = ?
+                    ';
+                    
+                    $queryUpdate  = $pdo->prepare($sqlUpdate);
+                    $request      = $queryUpdate->execute([$name, $age, $address, $identification, $phone, $email, $birthdate, $is_active, $id]);
+                    $action       = 2;
+                }else{
+                    $sqlUpdate = '
+                        UPDATE
+                            students
+                        SET
+                            name = ?,
+                            age  = ?,
+                            address = ?,
+                            identification = ?,
+                            password = ?,
+                            phone = ?,
+                            email = ?,
+                            birthdate = ?,
+                            is_active = ?
+                        WHERE
+                            id = ?
+                    ';
+                    
+                    $queryUpdate  = $pdo->prepare($sqlUpdate);
+                    $request      = $queryUpdate->execute([$name, $age, $address, $identification, $password_hash, $phone, $email, $birthdate, $is_active, $id]);
+                    $action       = 2;
+                }
             }
             
             if($request > 0){
