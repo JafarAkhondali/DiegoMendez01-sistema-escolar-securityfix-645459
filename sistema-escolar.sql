@@ -1,5 +1,3 @@
-CREATE DATABASE sistema_escolar;
-USE sistema_escolar;
 -- phpMyAdmin SQL Dump
 -- version 5.0.3
 -- https://www.phpmyadmin.net/

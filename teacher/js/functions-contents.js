@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function(){
-	var formMark = document.querySelector('#formMark');
-	formMark.onsubmit = function(e){
+	var formContent = document.querySelector('#formContent');
+	formContent.onsubmit = function(e){
 		e.preventDefault();
 		
-		var id          = document.querySelector('#id');
-		var title       = document.querySelector('#title');
-		var description = document.querySelector('#description');
-		var material    = document.querySelector('#material');
+		var id          = document.querySelector('#id').value;
+		var title       = document.querySelector('#title').value;
+		var description = document.querySelector('#description').value;
+		var material    = document.querySelector('#material').value;
 		
-		if(mark_value == ''){
+		if(title == '' || description == ''){
 			Swal.fire('Atencion', 'Todos los campos son necesarios', 'error');
 			return false;
 		}
 		
 		var request = (window.XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject('Microsoft.XMLHTTP');
 		var url     = './models/contents/ajax_contents.php';
-		var form    = new FormData(formMark);
+		var form    = new FormData(formContent);
 		
 		request.open('POST', url, true);
 		request.send(form);
