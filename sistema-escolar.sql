@@ -52,6 +52,7 @@ CREATE TABLE `students`
   `identification` VARCHAR(20) NOT NULL UNIQUE,
   `password` VARCHAR(255) NOT NULL,
   `phone` BIGINT(20) NOT NULL UNIQUE,
+  `access` DATE DEFAULT NULL,
   `email` VARCHAR(100) NOT NULL UNIQUE,
   `birthdate` DATE NOT NULL,
   `created` DATETIME NOT NULL,
